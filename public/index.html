@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>سويونغ – معلّمتك للغات</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#5B3FD6">
+<link rel="icon" href="/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#F2F0FB;--surface:#fff;--ink:#241B3F;--muted:#6B6485;--brand:#5B3FD6;--brand-ink:#fff;--rose:#FF6F91;--mint:#1FA88C;--line:#DDD8F2;--bad:#D6405C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#17122B;--surface:#231C40;--ink:#F1EEFF;--muted:#A79FC8;--brand:#8E78FF;--brand-ink:#16102B;--rose:#FF8DA8;--mint:#4FD1B5;--line:#383060;--bad:#FF7C93}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#17122B;--surface:#231C40;--ink:#F1EEFF;--muted:#A79FC8;--brand:#8E78FF;--brand-ink:#16102B;--rose:#FF8DA8;--mint:#4FD1B5;--line:#383060;--bad:#FF7C93}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Cairo",system-ui,sans-serif;line-height:1.6}
+main{max-width:520px;margin:0 auto;padding:20px 16px 40px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--brand));display:grid;place-items:center;font-size:26px;color:#fff;flex:none}
+h1{font-size:1.25rem;margin:0;font-weight:800}
+header p{margin:0;color:var(--muted);font-size:.9rem}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+button{font:inherit;color:inherit;cursor:pointer}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 16px;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:4px;margin:6px 0 16px}
+.tab{border:0;background:none;padding:8px 2px;border-radius:10px;font-weight:600;font-size:.88rem;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--brand);color:var(--brand-ink)}
+.card{background:var(--surface);border:1.5px solid var(--line);border-radius:24px;padding:28px 20px;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px}
+.word{font-size:3rem;font-weight:800;line-height:1.2;direction:ltr}
+.pron{color:var(--brand);font-weight:600;font-size:1.15rem}
+.meaning{font-size:1.5rem;font-weight:800;color:var(--mint)}
+.ex{direction:ltr;font-size:1.05rem;margin-top:6px}
+.exm{color:var(--muted);font-size:.95rem}
+.hint{color:var(--muted)}
+.row{display:flex;gap:10px;margin-top:14px}
+.btn{flex:1;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:11px;font-weight:600}
+.btn.main{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.btn:focus-visible,.chip:focus-visible,.tab:focus-visible,.opt:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.speak{border:0;background:var(--rose);color:#fff;border-radius:999px;padding:8px 18px;font-weight:600;margin-top:6px}
+.opts{display:grid;gap:10px;width:100%;margin-top:14px}
+.opt{border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:12px;font-weight:600;font-size:1.05rem}
+.opt.ok{background:var(--mint);color:#fff;border-color:var(--mint)}
+.opt.no{background:var(--bad);color:#fff;border-color:var(--bad)}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:.9rem;margin-bottom:8px}
+.bar{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--brand);width:0;transition:width .3s}
+.list{list-style:none;padding:0;margin:14px 0 0;width:100%;text-align:start}
+.list li{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.list .w{direction:ltr;font-weight:800}
+.chat{display:flex;flex-direction:column;gap:10px;min-height:340px;max-height:56vh;overflow-y:auto;padding:4px 2px 8px}
+.b{max-width:88%;padding:10px 14px;border-radius:18px;line-height:1.7;overflow-wrap:anywhere}
+.b.u{align-self:flex-start;background:var(--brand);color:var(--brand-ink);border-end-start-radius:6px}
+.b.a{align-self:flex-end;background:var(--surface);border:1.5px solid var(--line);border-end-end-radius:6px}
+.empty{margin:auto;text-align:center;color:var(--muted);padding:20px}
+.empty .em{font-size:2.6rem}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.sg{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.9rem}
+.compose{display:flex;gap:8px;margin-top:10px}
+.compose input{flex:1;min-width:0;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:11px 14px;font:inherit}
+.compose input:focus-visible,.sg:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+.compose .btn{flex:none;padding:11px 18px}
+.nums{display:grid;gap:8px}
+.num{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:10px;width:100%;text-align:start;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:8px 12px}
+.num .n{font-weight:800;color:var(--brand)}
+.num .nw{direction:ltr;text-align:left;font-weight:800;font-size:1.15rem}
+.num .np{color:var(--muted);font-size:.9rem}
+.mic{flex:none;width:46px;border:0;border-radius:14px;background:var(--rose);color:#fff;font-size:1.2rem}
+.ch{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:.9rem}
+.mic:focus-visible,.ch:focus-visible,.num:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="avatar" aria-hidden="true">🌸</div>
+  <div><h1>سويونغ، معلّمتك للغات</h1><p>كلمة بعد كلمة، حتى تتكلم بثقة</p></div>
+</header>
+<div class="chips" id="langs" role="group" aria-label="اختر اللغة"></div>
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" data-t="learn" aria-selected="true">تعلّم</button>
+  <button class="tab" role="tab" data-t="nums" aria-selected="false">أرقام</button>
+  <button class="tab" role="tab" data-t="chat" aria-selected="false">محادثة</button>
+  <button class="tab" role="tab" data-t="quiz" aria-selected="false">اختبار</button>
+  <button class="tab" role="tab" data-t="review" aria-selected="false">مراجعة</button>
+</div>
+<section id="view"></section>
+</main>
+<script>
+const L={
+ko:{n:"الكورية",v:"ko-KR",w:[
+["안녕하세요","أنيونغ هاسيو","مرحبًا","안녕하세요, 만나서 반갑습니다.","مرحبًا، سعيد بلقائك"],
+["감사합니다","كامسا هامنيدا","شكرًا","도와주셔서 감사합니다.","شكرًا لمساعدتك"],
+["사랑해요","ساراغ هيو","أحبك","가족을 사랑해요.","أحب عائلتي"],
+["물","مول","ماء","물 주세요.","أعطني ماءً من فضلك"],
+["맛있어요","ماشيسو يو","لذيذ","정말 맛있어요!","لذيذ حقًا"],
+["친구","تشينغو","صديق","저는 친구가 있어요.","لدي صديق"],
+["미안해요","ميان هيو","آسف","늦어서 미안해요.","آسف على التأخر"],
+["학교","هاكغيو","مدرسة","학교에 가요.","أذهب إلى المدرسة"]]},
+zh:{n:"الصينية",v:"zh-CN",w:[
+["你好","ني هاو (nǐ hǎo)","مرحبًا","你好,我叫小明。","مرحبًا، اسمي شياو مينغ"],
+["谢谢","شيه شيه (xièxie)","شكرًا","谢谢你的帮助。","شكرًا لمساعدتك"],
+["我爱你","وو آي ني (wǒ ài nǐ)","أحبك","我爱我的家人。","أحب عائلتي"],
+["水","شوي (shuǐ)","ماء","我想喝水。","أريد أن أشرب ماءً"],
+["好吃","هاو تشي (hǎo chī)","لذيذ","这个很好吃。","هذا لذيذ جدًا"],
+["朋友","بنغ يو (péngyou)","صديق","他是我的朋友。","هو صديقي"],
+["对不起","دوي بو تشي (duìbuqǐ)","آسف","对不起,我迟到了。","آسف، تأخرت"],
+["学校","شيوي شياو (xuéxiào)","مدرسة","我去学校。","أذهب إلى المدرسة"]]},
+en:{n:"الإنجليزية",v:"en-US",w:[
+["Hello","هيلو","مرحبًا","Hello, nice to meet you.","مرحبًا، سعيد بلقائك"],
+["Thank you","ثانك يو","شكرًا","Thank you for your help.","شكرًا لمساعدتك"],
+["Friend","فرِند","صديق","She is my best friend.","هي أفضل صديقاتي"],
+["Water","ووتر","ماء","Can I have some water?","هل أستطيع الحصول على ماء؟"],
+["Delicious","ديليشِس","لذيذ","This cake is delicious!","هذه الكعكة لذيذة!"],
+["Sorry","سوري","آسف","Sorry, I’m late.","آسف، تأخرت"],
+["School","سكول","مدرسة","I go to school.","أذهب إلى المدرسة"],
+["Beautiful","بيوتيفل","جميل","What a beautiful day!","يا له من يوم جميل!"]]},
+ja:{n:"اليابانية",v:"ja-JP",w:[
+["こんにちは","كونيتشيوا","مرحبًا","こんにちは、元気ですか。","مرحبًا، كيف حالك؟"],
+["ありがとう","أريغاتو","شكرًا","ありがとう、助かりました。","شكرًا، لقد ساعدتني"],
+["友達","تومودتشي","صديق","友達と遊びます。","ألعب مع صديقي"],
+["水","ميزو","ماء","水をください。","أعطني ماءً من فضلك"],
+["おいしい","أويشي","لذيذ","とてもおいしいです。","لذيذ جدًا"],
+["ごめんなさい","غومين ناساي","آسف","遅れてごめんなさい。","آسف على التأخر"],
+["学校","غاكّو","مدرسة","学校に行きます。","أذهب إلى المدرسة"],
+["美しい","أوتسوكوشي","جميل","美しい花ですね。","يا لها من زهرة جميلة"]]},
+fr:{n:"الفرنسية",v:"fr-FR",w:[
+["Bonjour","بونجور","مرحبًا","Bonjour, comment ça va ?","مرحبًا، كيف حالك؟"],
+["Merci","ميرسي","شكرًا","Merci beaucoup !","شكرًا جزيلًا"],
+["Ami","آمي","صديق","C’est mon ami.","هذا صديقي"],
+["Eau","أو","ماء","Un verre d’eau, s’il vous plaît.","كأس ماء من فضلك"],
+["Délicieux","ديليسيو","لذيذ","Ce gâteau est délicieux.","هذه الكعكة لذيذة"],
+["Désolé","ديزولي","آسف","Désolé, je suis en retard.","آسف، تأخرت"],
+["École","إيكول","مدرسة","Je vais à l’école.","أذهب إلى المدرسة"],
+["Beau","بو","جميل","Il fait beau aujourd’hui.","الجو جميل اليوم"]]},
+es:{n:"الإسبانية",v:"es-ES",w:[
+["Hola","أولا","مرحبًا","Hola, ¿cómo estás?","مرحبًا، كيف حالك؟"],
+["Gracias","غراسياس","شكرًا","Muchas gracias.","شكرًا جزيلًا"],
+["Amigo","أميغو","صديق","Él es mi amigo.","هو صديقي"],
+["Agua","أغوا","ماء","Quiero agua, por favor.","أريد ماءً من فضلك"],
+["Delicioso","ديليسيوسو","لذيذ","Está delicioso.","إنه لذيذ"],
+["Lo siento","لو سيينتو","آسف","Lo siento, llego tarde.","آسف، أتأخر"],
+["Escuela","إسكويلا","مدرسة","Voy a la escuela.","أذهب إلى المدرسة"],
+["Hermoso","إرموسو","جميل","Qué día tan hermoso.","يا له من يوم جميل"]]}
+};
+const X={
+ko:"네|ني|نعم;아니요|أنيو|لا;부탁합니다|بوتاك هامنيدا|من فضلك;안녕히 가세요|أنيونغ هي غاسيو|وداعًا;좋은 아침|جوهن أتشيم|صباح الخير;안녕히 주무세요|أنيونغ هي جوموسيو|تصبح على خير;음식|أومسيك|طعام;커피|كوبي|قهوة;집|جيب|بيت;엄마|أومّا|أم;아빠|أبّا|أب;책|تشيك|كتاب;일|إيل|عمل;행복해요|هينغبوك هيو|سعيد;큰|كن|كبير;작은|جاغن|صغير;어디예요?|أوديي يو؟|أين؟;얼마예요?|أولما ييو؟|كم السعر؟;도와주세요|دوا جوسيو|ساعدني;제 이름은|جي إيرومون|اسمي",
+zh:"是|شي (shì)|نعم;不|بو (bù)|لا;请|تشينغ (qǐng)|من فضلك;再见|تساي جيان (zàijiàn)|وداعًا;早上好|زاو شانغ هاو (zǎoshang hǎo)|صباح الخير;晚安|وان آن (wǎn ān)|تصبح على خير;食物|شي وو (shíwù)|طعام;咖啡|كا في (kāfēi)|قهوة;家|جيا (jiā)|بيت;妈妈|ما ما (māma)|أم;爸爸|با با (bàba)|أب;书|شو (shū)|كتاب;工作|قونغ زوه (gōngzuò)|عمل;高兴|قاو شينغ (gāoxìng)|سعيد;大|دا (dà)|كبير;小|شياو (xiǎo)|صغير;哪里|نا لي (nǎlǐ)|أين؟;多少钱|دوه شاو تشيان (duōshao qián)|كم السعر؟;请帮我|تشينغ بانغ وو (qǐng bāng wǒ)|ساعدني;我叫|وو جياو (wǒ jiào)|اسمي",
+en:"Yes|يس|نعم;No|نو|لا;Please|بليز|من فضلك;Goodbye|غودباي|وداعًا;Good morning|غود مورنينغ|صباح الخير;Good night|غود نايت|تصبح على خير;Food|فود|طعام;Coffee|كوفي|قهوة;House|هاوس|بيت;Mother|ماذر|أم;Father|فاذر|أب;Book|بوك|كتاب;Work|ويرك|عمل;Happy|هابي|سعيد;Big|بيغ|كبير;Small|سمول|صغير;Where?|وير؟|أين؟;How much?|هاو ماتش؟|كم السعر؟;Help me|هيلب مي|ساعدني;My name is|ماي نيم إز|اسمي",
+ja:"はい|هاي|نعم;いいえ|إيييه|لا;お願いします|أونيغاي شيماس|من فضلك;さようなら|سايونارا|وداعًا;おはよう|أوهايو|صباح الخير;おやすみ|أوياسومي|تصبح على خير;食べ物|تابيمونو|طعام;コーヒー|كوهي|قهوة;家|إيه|بيت;お母さん|أوكاسان|أم;お父さん|أوتوسان|أب;本|هون|كتاب;仕事|شيغوتو|عمل;嬉しい|أوريشي|سعيد;大きい|أووكي|كبير;小さい|تشيساي|صغير;どこ?|دوكو؟|أين؟;いくらですか|إيكورا ديس كا؟|كم السعر؟;助けて|تاسوكيتي|ساعدني;私の名前は|واتاشي نو ناماي وا|اسمي",
+fr:"Oui|وي|نعم;Non|نون|لا;S’il vous plaît|سيل فو بليه|من فضلك;Au revoir|أو روفوار|وداعًا;Bonsoir|بونسوار|مساء الخير;Bonne nuit|بون نوي|تصبح على خير;Nourriture|نوريتور|طعام;Café|كافيه|قهوة;Maison|ميزون|بيت;Mère|ميير|أم;Père|بيير|أب;Livre|ليفر|كتاب;Travail|ترافاي|عمل;Heureux|أورو|سعيد;Grand|غران|كبير;Petit|بوتي|صغير;Où ?|أو؟|أين؟;Combien ?|كومبيان؟|كم السعر؟;Aidez-moi|إيدي موا|ساعدني;Je m’appelle|جو مابيل|اسمي",
+es:"Sí|سي|نعم;No|نو|لا;Por favor|بور فابور|من فضلك;Adiós|أديوس|وداعًا;Buenos días|بوينوس ديياس|صباح الخير;Buenas noches|بوينس نوتشيس|تصبح على خير;Comida|كوميدا|طعام;Café|كافيه|قهوة;Casa|كاسا|بيت;Madre|مادري|أم;Padre|بادري|أب;Libro|ليبرو|كتاب;Trabajo|تراباخو|عمل;Feliz|فيليث|سعيد;Grande|غراندي|كبير;Pequeño|بيكينيو|صغير;¿Dónde?|دوندي؟|أين؟;¿Cuánto cuesta?|كوانتو كويستا؟|كم السعر؟;Ayúdame|أيودامي|ساعدني;Me llamo|مي ياماو|اسمي"};
+for(const k in X)L[k].w.push(...X[k].split(";").map(s=>s.split("|")));
+const mk=(d,a,t,ta,h,ha)=>n=>{if(n==100)return[h,ha];const x=n/10|0,u=n%10;return[(x>1?d[x]:"")+(x?t:"")+d[u],[x>1?a[x]:"",x?ta:"",a[u]].filter(Boolean).join(" ")]};
+const sp=s=>s.split(" ");
+const enn=sp("one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen"),ena=sp("وان تو ثري فور فايف سيكس سيفن إيت ناين تن إليفن توِلف ثيرتين فورتين فيفتين سيكستين سيفنتين إيتين ناينتين"),ent=sp("twenty thirty forty fifty sixty seventy eighty ninety"),enta=sp("توينتي ثيرتي فورتي فيفتي سيكستي سيفنتي إيتي ناينتي");
+const en=n=>{if(n<20)return[enn[n-1],ena[n-1]];if(n==100)return["one hundred","وان هاندرد"];const t=(n/10|0)-2,u=n%10;return[ent[t]+(u?"-"+enn[u-1]:""),enta[t]+(u?" "+ena[u-1]:"")]};
+const frn=sp("un deux trois quatre cinq six sept huit neuf dix onze douze treize quatorze quinze seize"),frt={2:"vingt",3:"trente",4:"quarante",5:"cinquante",6:"soixante"};
+const frk=sp("un deux trois quatre cinq six sept huit neuf dix onze douze treize quatorze quinze seize vingt vingts trente quarante cinquante soixante cent et"),frv=sp("أون دو تروا كاتر سانك سيس سيت ويت نوف ديس أونز دوز تريز كاتورز كانز سيز فان فان ترانت كارانت سانكانت سواسانت سان إي"),frm={};frk.forEach((k,j)=>frm[k]=frv[j]);
+const fr=n=>{if(n<=16)return frn[n-1];if(n<20)return"dix-"+frn[n-11];if(n==100)return"cent";const t=n/10|0,u=n%10;if(t<7)return frt[t]+(u?(u==1?" et un":"-"+frn[u-1]):"");if(t==7)return n==71?"soixante et onze":"soixante-"+fr(n-60);if(t==8)return u?"quatre-vingt-"+fr(u):"quatre-vingts";return"quatre-vingt-"+fr(n-80)};
+const esn=sp("uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece catorce quince"),esa=sp("أونو دوس تريس كواترو سينكو سيس سييتي أوتشو نويبي دييث أونسي دوسي تريسي كاتورسي كينسي"),est=sp("treinta cuarenta cincuenta sesenta setenta ochenta noventa"),esta=sp("ترينتا كوارينتا سينكوينتا سيسينتا سيتينتا أوتشينتا نوفينتا"),acc={2:"dós",3:"trés",6:"séis"};
+const es=n=>{if(n<=15)return[esn[n-1],esa[n-1]];if(n==100)return["cien","سيين"];if(n==20)return["veinte","بيينتي"];const u=n%10;if(n<30)return[(n<20?"dieci":"veinti")+(acc[u]||esn[u-1]),(n<20?"دييسي":"بيينتي")+esa[u-1]];const t=(n/10|0)-3;return[est[t]+(u?" y "+esn[u-1]:""),esta[t]+(u?" إي "+esa[u-1]:"")]};
+const G={ko:mk(",일,이,삼,사,오,육,칠,팔,구".split(","),",إيل,إي,سام,سا,أو,يوك,تشيل,بال,غو".split(","),"십","شيب","백","بايك"),zh:mk(",一,二,三,四,五,六,七,八,九".split(","),",ي,أر,سان,سه,وو,ليو,تشي,با,جيو".split(","),"十","شي","一百","ي باي"),ja:mk(",一,二,三,四,五,六,七,八,九".split(","),",إيتشي,ني,سان,يون,غو,روكو,نانا,هاتشي,كيو".split(","),"十","جو","百","هياكو"),en,fr:n=>{const s=fr(n);return[s,s.split(/[ -]/).map(w=>frm[w]).join(" ")]},es};
+const NUM={};for(const k in G)NUM[k]=Array.from({length:100},(_,j)=>G[k](j+1));
+let lang="ko",tab="learn",i=0,flipped=false,q=null,score=0,asked=0,wrong={};
+try{wrong=JSON.parse(localStorage.getItem("wrong")||"{}")}catch(e){}
+const $=s=>document.querySelector(s),view=$("#view");
+const save=()=>{try{localStorage.setItem("wrong",JSON.stringify(wrong))}catch(e){}};
+const words=()=>L[lang].w;
+function speak(t){
+  if(!("speechSynthesis" in window)){alert("المتصفح لا يدعم النطق الصوتي");return}
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=L[lang].v;u.rate=.85;speechSynthesis.speak(u);
+}
+function chips(){
+  $("#langs").innerHTML=Object.keys(L).map(k=>`<button class="chip" data-l="${k}" aria-pressed="${k===lang}">${L[k].n}</button>`).join("");
+}
+function learn(){
+  const w=words()[i];
+  view.innerHTML=`<div class="meta"><span>${i+1} / ${words().length}</span><span>اضغط البطاقة لإظهار المعنى</span></div>
+  <div class="bar"><i style="width:${(i+1)/words().length*100}%"></i></div>
+  <div class="card" id="card" tabindex="0" role="button" aria-label="اقلب البطاقة">
+    <div class="word">${w[0]}</div><div class="pron">${w[1]}</div>
+    ${flipped?`<div class="meaning">${w[2]}</div>${w[3]?`<div class="ex">${w[3]}</div><div class="exm">${w[4]||""}</div>`:""}`:`<div class="hint">؟</div>`}
+    <button class="speak" id="say">🔊 استمع</button>
+  </div>
+  <div class="row"><button class="btn" id="prev">السابق</button><button class="btn main" id="next">التالي</button></div>
+  <button class="btn" id="more" style="width:100%;margin-top:10px">✨ كلمات جديدة من سويونغ</button>`;
+  $("#card").onclick=e=>{if(e.target.id==="say"){speak(w[0]);return}flipped=!flipped;learn()};
+  $("#card").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flipped=!flipped;learn()}};
+  $("#prev").onclick=()=>{i=(i-1+words().length)%words().length;flipped=false;learn()};
+  $("#next").onclick=()=>{i=(i+1)%words().length;flipped=false;learn()};
+  $("#more").onclick=e=>moreWords(e.currentTarget);
+}
+function nextQ(){
+  const ws=words(),w=ws[Math.floor(Math.random()*ws.length)];
+  const others=[...new Set(ws.map(x=>x[2]).filter(m=>m!==w[2]))].sort(()=>Math.random()-.5).slice(0,3);
+  q={w,opts:[...others,w[2]].sort(()=>Math.random()-.5),done:false};quiz();
+}
+function quiz(){
+  if(!q)return nextQ();
+  view.innerHTML=`<div class="meta"><span>النتيجة: ${score} / ${asked}</span><span>ما معنى هذه الكلمة؟</span></div>
+  <div class="card"><div class="word">${q.w[0]}</div><div class="pron">${q.w[1]}</div>
+  <button class="speak" id="say">🔊 استمع</button>
+  <div class="opts">${q.opts.map(o=>`<button class="opt" data-o="${o}">${o}</button>`).join("")}</div></div>
+  <div class="row">${q.done?'<button class="btn main" id="nq">السؤال التالي</button>':""}</div>`;
+  $("#say").onclick=()=>speak(q.w[0]);
+  view.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+    if(q.done)return;q.done=true;asked++;
+    const ok=b.dataset.o===q.w[2],key=lang+"|"+q.w[0];
+    if(ok){score++;if(wrong[key]){delete wrong[key]}}else{wrong[key]=1}
+    save();quiz();
+    view.querySelectorAll(".opt").forEach(x=>{if(x.dataset.o===q.w[2])x.classList.add("ok");else if(x===undefined);});
+    view.querySelectorAll(".opt").forEach(x=>{if(!ok&&x.dataset.o===b.dataset.o)x.classList.add("no")});
+  });
+  if(q.done){view.querySelectorAll(".opt").forEach(x=>{if(x.dataset.o===q.w[2])x.classList.add("ok")});$("#nq").onclick=nextQ}
+}
+function review(){
+  const items=Object.keys(wrong).map(k=>{const[l,t]=k.split("|");const w=L[l].w.find(x=>x[0]===t);return w?{l,w}:null}).filter(Boolean);
+  view.innerHTML=`<div class="card">${items.length?`<div class="meaning" style="color:var(--rose)">كلمات تحتاج مراجعة</div>
+  <ul class="list">${items.map(x=>`<li><span class="w">${x.w[0]}</span><span>${x.w[2]} · ${L[x.l].n}</span></li>`).join("")}</ul>
+  <button class="btn" id="clr" style="width:100%;margin-top:14px">مسح القائمة</button>`:
+  `<div style="font-size:2.5rem">✨</div><div class="meaning">لا توجد أخطاء بعد</div><div class="hint">الكلمات التي تخطئ فيها في الاختبار تظهر هنا لتراجعها.</div>`}</div>`;
+  const c=$("#clr");if(c)c.onclick=()=>{wrong={};save();review()};
+}
+const SYS=()=>`أنتِ «سويونغ»، معلّمة لغات ودودة وذكية وواسعة المعرفة. اللغة التي يتعلمها الطالب الآن: ${L[lang].n}. تجيبين عن أي سؤال في أي موضوع، حتى خارج اللغات، بوضوح ودفء. الافتراضي: الرد بالعربية. عند الحديث عن لغة أجنبية اكتبي الكلمة بكتابتها الأصلية ثم نطقها بالحروف العربية ثم معناها، وصحّحي أخطاء الطالب بلطف مع الشرح. اجعلي الردود مرتبة ومختصرة، مع إيموجي باعتدال. الردود تُقرأ بصوت عالٍ أحيانًا فتجنّبي الجداول والرموز الكثيرة.`;
+let chat=[],busy=false,sm=null;
+async function getSample(){
+  if(sm)return sm;
+  const post=async(u,b)=>{const r=await fetch(u,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(b)});const d=await r.json().catch(()=>({}));if(!r.ok)throw{code:r.status===429?"rate_limited":"error"};return d};
+  sm=h=>post("/api/chat",{messages:h,lang:L[lang].n});
+  sm.json=async p=>(await post("/api/json",{prompt:p})).data;
+  return sm}
+const fmt=t=>t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/\n/g,"<br>");
+function chatView(){
+  const sug=["كيف أقول «أحبك» بالكورية؟","علّمني 5 كلمات عن الطعام","ما الفرق بين الصينية واليابانية؟","اشرح لي كيف تعمل الطائرات ببساطة"];
+  view.innerHTML=`<div class="chat" id="msgs">${chat.length?chat.map(m=>`<div class="b ${m.r}">${fmt(m.c)}</div>`).join(""):`<div class="empty"><div class="em">🌸</div><p>اسألني عن أي لغة، أو عن أي شيء آخر.<br>أنا هنا لأشرح وأصحّح وأتحدث معك.</p></div>`}</div>
+  ${chat.length?"":`<div class="sugg">${sug.map(s=>`<button class="sg">${s}</button>`).join("")}</div>`}
+  <div class="compose"><input id="inp" placeholder="اكتب أو تحدّث…" aria-label="رسالتك" autocomplete="off"><button class="mic" id="mic" aria-label="تحدّث">🎤</button><button class="btn main" id="snd">إرسال</button></div>
+  <div class="sugg"><button class="ch" id="vo">${voiceOn?"🔊 الرد الصوتي: يعمل":"🔇 الرد الصوتي: متوقف"}</button><button class="ch" id="ml">🎤 أتحدث بـ${micAr?"العربية":L[lang].n}</button></div>`;
+  const m=$("#msgs");m.scrollTop=m.scrollHeight;
+  const go=()=>{const v=$("#inp").value;$("#inp").value="";send(v)};
+  $("#snd").onclick=go;$("#inp").onkeydown=e=>{if(e.key==="Enter")go()};
+  $("#mic").onclick=toggleMic;setL(listening);
+  $("#vo").onclick=e=>{voiceOn=!voiceOn;if(!voiceOn)speechSynthesis.cancel();e.currentTarget.textContent=voiceOn?"🔊 الرد الصوتي: يعمل":"🔇 الرد الصوتي: متوقف"};
+  $("#ml").onclick=e=>{micAr=!micAr;e.currentTarget.textContent="🎤 أتحدث بـ"+(micAr?"العربية":L[lang].n)};
+  view.querySelectorAll(".sg").forEach(b=>b.onclick=()=>send(b.textContent));
+}
+async function send(t){
+  t=t.trim();if(!t||busy)return;
+  const s=await getSample();chat.push({r:"u",c:t});
+  if(!s){chat.push({r:"a",c:"المحادثة الذكية غير متاحة في هذا العرض. افتح الصفحة من حسابك في Claude."});chatView();return}
+  busy=true;chat.push({r:"a",c:"…"});chatView();
+  let h=chat.slice(0,-1).slice(-12).map(m=>({role:m.r==="u"?"user":"assistant",content:m.c}));
+  while(h.length&&h[0].role!=="user")h.shift();
+  
+  const last=chat[chat.length-1];
+  try{
+    const r=await s(h,{cache:false,onText:({text})=>{last.c=text;const b=document.querySelector("#msgs .b:last-child");if(b){b.innerHTML=fmt(text);b.parentNode.scrollTop=b.parentNode.scrollHeight}}});
+    last.c=r.text||"…";
+    if(voiceOn)speakMixed(last.c);
+  }catch(e){
+    last.c=e&&e.code==="not_granted"?"لم تتم الموافقة على استخدام المحادثة.":e&&e.code==="rate_limited"?"الطلبات كثيرة الآن، انتظر قليلًا ثم حاول مجددًا.":"تعذّر الرد، حاول مرة أخرى.";
+  }
+  busy=false;if(tab==="chat")chatView();
+}
+async function moreWords(btn){
+  const s=await getSample();
+  if(!s){btn.textContent="غير متاح في هذا العرض";return}
+  btn.disabled=true;btn.textContent="سويونغ تجهّز كلماتك…";
+  const have=words().map(w=>w[0]).join("، ");
+  try{
+    const a=await s.json(`أعطني 8 كلمات جديدة ومفيدة في اللغة ${L[lang].n} (مبتدئ إلى متوسط ومن مواضيع متنوعة) غير هذه: ${have}. أعد مصفوفة JSON فقط، كل عنصر مصفوفة من 5 نصوص بالترتيب: الكلمة بكتابتها الأصلية، نطقها بالحروف العربية، المعنى بالعربية (كلمة أو كلمتان)، جملة مثال قصيرة بالأصل، ترجمة الجملة بالعربية. بدون أي نص آخر.`,{cache:false});
+    const ok=(Array.isArray(a)?a:[]).filter(x=>Array.isArray(x)&&x.length>=5).map(x=>x.slice(0,5).map(String));
+    if(ok.length){i=words().length;L[lang].w.push(...ok)}
+  }catch(e){}
+  flipped=false;learn();
+}
+function numsView(){
+  const g=NUM[lang];
+  view.innerHTML=`<div class="meta"><span>الأرقام من 1 إلى 100</span><span>اضغط للاستماع</span></div><div class="nums">${g.map((x,k)=>`<button class="num" data-k="${k}"><span class="n">${k+1}</span><span class="nw">${x[0]}</span><span class="np">${x[1]}</span></button>`).join("")}</div>`;
+  view.querySelectorAll(".num").forEach(b=>b.onclick=()=>speak(g[b.dataset.k][0]));
+}
+const cls=c=>{const x=c.charCodeAt(0);if(x>=0x600&&x<=0x6FF)return"ar-SA";if(x>=0xAC00&&x<=0xD7AF||x>=0x1100&&x<=0x11FF)return"ko-KR";if(x>=0x3040&&x<=0x30FF)return"ja-JP";if(x>=0x4E00&&x<=0x9FFF)return lang==="ja"?"ja-JP":"zh-CN";if(/[A-Za-zÀ-ÿ]/.test(c))return["fr","es"].includes(lang)?L[lang].v:"en-US";return null};
+function speakMixed(t){
+  if(!("speechSynthesis" in window))return;
+  t=t.replace(/[*_#`>~]/g,"").replace(/\p{Extended_Pictographic}/gu,"").slice(0,700);
+  const out=[];let cur=null,buf="";
+  for(const ch of t){const c=cls(ch)||cur;if(c!==cur&&buf.trim()){out.push([cur||"ar-SA",buf]);buf=""}cur=c;buf+=ch}
+  if(buf.trim())out.push([cur||"ar-SA",buf]);
+  speechSynthesis.cancel();
+  out.forEach(([l,s])=>{const u=new SpeechSynthesisUtterance(s);u.lang=l;u.rate=.9;speechSynthesis.speak(u)});
+}
+let micAr=true,listening=false,rec=null,dict=null,voiceOn=true,base="",srBad=false;
+function setL(on){listening=on;const b=$("#mic");if(b){b.textContent=on?"⏹":"🎤";b.setAttribute("aria-label",on?"إيقاف":"تحدّث")}}
+function micMsg(t){const x=$("#inp");if(x)x.placeholder=t}
+function micDone(){setL(false);const x=$("#inp");if(x&&x.value.trim()){const v=x.value;x.value="";send(v)}}
+function toggleMic(){
+  if(listening){try{rec?rec.stop():dict&&dict.stop()}catch(e){}return}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition,x=$("#inp");
+  speechSynthesis.cancel();rec=null;
+  if(SR&&!srBad){
+    rec=new SR();rec.lang=micAr?"ar-SA":L[lang].v;rec.interimResults=true;
+    rec.onresult=e=>{x.value=[...e.results].map(r=>r[0].transcript).join(" ")};
+    rec.onerror=e=>{if(["not-allowed","service-not-allowed"].includes(e.error)){srBad=true;micMsg(dict?"اضغط 🎤 مرة أخرى":"لم يُسمح بالميكروفون")}else micMsg("لم أسمعك، حاول مجددًا")};
+    rec.onend=micDone;
+    try{rec.start();setL(true)}catch(e){srBad=true;rec=null}
+  }else if(dict){x.value="";base="";dict.start().then(()=>setL(true)).catch(()=>micMsg("لم يُسمح بالميكروفون"))}
+  else micMsg("الميكروفون غير مدعوم في هذا المتصفح");
+}
+try{window.claude.use("dictation").then(d=>{dict=d;if(!d)return;
+  d.onPartial(({text})=>{const x=$("#inp");if(x)x.value=base+text});
+  d.onFinal(({text})=>{base+=text+" ";const x=$("#inp");if(x)x.value=base});
+  d.onState(({state})=>{if(state==="listening")setL(true);else if(state==="idle"&&listening){base="";micDone()}})}).catch(()=>{})}catch(e){}
+function render(){chips();({learn,nums:numsView,quiz,review,chat:chatView})[tab]()}
+$("#langs").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;lang=b.dataset.l;i=0;flipped=false;q=null;render()};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{
+  tab=b.dataset.t;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===b));render()});
+render();
+if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js");
+</script>
+</body>
+</html>
